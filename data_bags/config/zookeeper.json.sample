@@ -1,0 +1,8 @@
+{
+  "id": "zookeeper",
+  "ensemble": [
+    "aaa.aaa.aaa.aaa",
+    "bbb.bbb.bbb.bbb",
+    "ccc.ccc.ccc.ccc"
+  ]
+}

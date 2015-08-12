@@ -1,0 +1,7 @@
+/cookbooks/
+/tmp/librarian/
+/.chef/
+/cache/
+/data_bags/config/*.json
+/nodes/*.json
+*.lock

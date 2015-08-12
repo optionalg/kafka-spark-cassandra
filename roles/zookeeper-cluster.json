@@ -1,0 +1,21 @@
+{
+  "name": "zookeeper-cluster",
+  "description": "Role for all zookeeper nodes.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "zookeeper-cluster": {
+      "databag": "zookeeper"
+    }  
+  },
+  "override_attributes": {
+  
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[basic-servers]",
+    "recipe[zookeeper_wrapper]"
+  ],
+  "env_run_lists": {
+  
+  }
+}

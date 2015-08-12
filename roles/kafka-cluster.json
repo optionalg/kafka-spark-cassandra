@@ -1,0 +1,22 @@
+{
+  "name": "kafka-cluster",
+  "description": "Role for all kafka nodes.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+	  "zookeeper-cluster": {
+     	"databag": "zookeeper"
+		}
+  },
+  "override_attributes": {
+
+  },
+  "chef_type": "role",
+  "run_list": [
+		"role[zookeeper-cluster]",
+		"recipe[kafka_wrapper::default]",
+		"recipe[kafka_wrapper::service]"
+  ],
+  "env_run_lists": {
+
+  }
+}

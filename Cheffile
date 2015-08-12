@@ -1,0 +1,6 @@
+site 'http://community.opscode.com/api/v1'
+
+cookbook 'java_wrapper', 	:path => 'site-cookbooks/java_wrapper'
+cookbook 'scala_wrapper', 	:path => 'site-cookbooks/scala_wrapper'
+cookbook 'zookeeper_wrapper',	:path => 'site-cookbooks/zookeeper_wrapper'
+cookbook 'kafka_wrapper', 	:path => 'site-cookbooks/kafka_wrapper'

@@ -1,0 +1,15 @@
+{
+  "run_list": [
+    //Insert the server roles here
+    "role[kafka-cluster]",
+    "role[spark-cluster]"
+  ],
+  "automatic": {
+    "ipaddress": "<your-server-ip>"
+  },
+  // Add this for a kafka server
+  "apache_kafka": {
+    // The broker id must be different for each broker
+    "broker.id": 0
+  }
+}
