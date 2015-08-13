@@ -16,12 +16,6 @@ version_tag = "kafka_#{node["kafka_wrapper"]["scala_version"]}-#{node["kafka_wra
   end
 end
 
-#service "kafka" do
-#  supports :restart => true, :start => true, :stop => true, :reload => true
-#  action :nothing
-#end 
-
-
 broker_id = node["kafka_wrapper"]["broker.id"]
 broker_id = 0 if broker_id.nil?
 

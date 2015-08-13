@@ -12,7 +12,9 @@
   },
   "chef_type": "role",
   "run_list": [
-                "role[basic-servers]"
+    "role[basic-servers]",
+    "recipe[scala_wrapper]",
+    "recipe[spark_wrapper]"
   ],
   "env_run_lists": {
 

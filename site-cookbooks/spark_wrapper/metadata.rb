@@ -1,0 +1,6 @@
+name             'spark_wrapper'
+maintainer       'Passworks'
+maintainer_email ''
+license          'All rights reserved'
+description      'Cookbook to install/launch a cluster of spark 1.4.1'
+version          '0.0.1'

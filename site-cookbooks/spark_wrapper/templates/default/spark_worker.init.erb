@@ -1,0 +1,20 @@
+description "Spark Worker"
+
+# This file is managed by Chef
+# Changes will be overwritten
+
+start on runlevel [2345]
+stop on starting rc RUNLEVEL=[016]
+
+respawn
+respawn limit 2 5
+
+umask 007
+
+kill timeout 300
+
+limit nofile 32768 32768
+
+pre-start exec start-stop-daemon --start --chuid spark --name spark --exec <%= @spark_dir %>/sbin/start-slave.sh spark://<%= @spark_master %>:7077 --
+
+post-stop exec start-stop-daemon --start --chuid spark --name spark --exec <%= @spark_dir %>/sbin/stop-slave.sh --
