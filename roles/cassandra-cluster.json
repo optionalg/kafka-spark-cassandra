@@ -1,0 +1,24 @@
+{
+  "name": "cassanra-cluster",
+  "description": "Role for all cassandra nodes",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+     "cassandra": {
+        "user": "cassandra",
+        "cluster_name": "Lighthouse",
+        "databag": "cassandra"
+     }
+  },
+  "override_attributes": {
+
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[basic-servers]",
+    "recipe[monit_wrapper]",
+    "recipe[cassandra]"
+  ],
+  "env_run_lists": {
+
+  }
+}
