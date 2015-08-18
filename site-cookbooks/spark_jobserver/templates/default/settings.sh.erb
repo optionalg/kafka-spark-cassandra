@@ -1,0 +1,22 @@
+# Environment and deploy file
+# For use with bin/server_deploy, bin/server_package etc.
+DEPLOY_HOSTS=""
+
+APP_USER=<%= @jobserver_user %>
+APP_GROUP=<%= @jobserver_group %>
+# optional SSH Key to login to deploy server
+#SSH_KEY=/path/to/keyfile.pem
+INSTALL_DIR=<%= @jobserver_dir %>
+LOG_DIR=<%= @jobserver_log_dir %>
+PIDFILE=<%= @jobserver_pidfile %>
+JOBSERVER_MEMORY=<%= @jobserver_memory %>
+SPARK_VERSION=<%= @jobserver_spark_version %>
+SPARK_HOME=<%= @jobserver_spark_home %>
+SPARK_CONF_DIR=<%= @jobserver_spark_conf_dir %>
+# Only needed for Mesos deploys
+# SPARK_EXECUTOR_URI=/home/spark/spark-0.8.0.tar.gz
+# Only needed for YARN running outside of the cluster
+# You will need to COPY these files from your cluster to the remote machine
+# Normally these are kept on the cluster in /etc/hadoop/conf
+# YARN_CONF_DIR=/pathToRemoteConf/conf
+SCALA_VERSION=<%= @jobserver_scala_version %>
