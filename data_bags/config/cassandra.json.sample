@@ -1,0 +1,6 @@
+{
+  "id": "cassandra",
+  "seeds": [
+    "aaa.bbb.ccc.dddd"
+  ]
+}

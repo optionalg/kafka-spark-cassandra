@@ -1,0 +1,8 @@
+{
+  "id": "spark",
+  "master": "aaa.aaa.aaa.aaa",
+  "slaves": [
+    "aaa.aaa.aaa.aaa",
+    "bbb.bbb.bbb.bbb"
+  ]
+}
