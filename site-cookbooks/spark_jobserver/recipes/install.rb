@@ -54,7 +54,7 @@ ruby_block 'give some permissions' do
 end
 
 # Other required permissions
-["#{default["jobserver"]["spark_home"]}/work",
+["#{node["jobserver"]["spark_home"]}/work",
  jobserver_log_dir].each do |dir|
 	directory dir do
 		owner jobserver_user

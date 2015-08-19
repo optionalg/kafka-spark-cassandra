@@ -28,5 +28,5 @@ end
 service "jobserver" do
 	provider Chef::Provider::Service::Upstart
 	supports :status => true, :restart => true, :stop => true
-	action :enable, :start
+	action [:enable, :start]
 end
