@@ -1,0 +1,22 @@
+{
+  "name": "spark-jobserver",
+  "description": "Role for spark jobserver.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+     "spark-cluster": {
+        "databag": "spark"
+     }
+  },
+  "override_attributes": {
+
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[basic-servers]",
+    "recipe[scala_wrapper]",
+    "recipe[spark_jobserver]"
+  ],
+  "env_run_lists": {
+
+  }
+}

@@ -23,6 +23,7 @@ template "#{jobserver_dir}/jobserver.conf" do
 	variables(
 		:master => "spark://#{bag["master"]}:7077"
 	)
+	notifies :restart, "service[jobserver]", :delayed
 end
 
 # settings.sh to setup environment variables
@@ -43,4 +44,14 @@ template "#{jobserver_dir}/settings.sh" do
 		:jobserver_spark_conf_dir => node["jobserver"]["conf_dir"],
 		:jobserver_scala_version => node["jobserver"]["scala_version"]
 	)
+	notifies :restart, "service[jobserver]", :delayed
+end
+
+# log4j-server.properties
+template "#{jobserver_dir}/log4j-server.properties" do
+	source "log4j-server.properties.erb"
+	owner jobserver_user
+	group jobserver_group
+	mode 770
+	notifies :restart, "service[jobserver]", :delayed
 end

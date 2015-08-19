@@ -40,7 +40,7 @@ execute "unzip jobserver source" do
 	not_if { Dir["#{jobserver_dir}/*"].count > 1 }
 end
 
-# Give permissions to the user
+# Give permissions to the user inside the jobserver_dir
 ruby_block 'give some permissions' do
 	block do
 		Dir["#{jobserver_dir}/*"].each do |path|
@@ -53,10 +53,14 @@ ruby_block 'give some permissions' do
 	end
 end
 
-directory jobserver_log_dir do
-	owner jobserver_user
-	group jobserver_group
-	mode 0777
-	action :create
-	recursive true
+# Other required permissions
+["#{default["jobserver"]["spark_home"]}/work",
+ jobserver_log_dir].each do |dir|
+	directory dir do
+		owner jobserver_user
+	        group jobserver_group
+	        mode 0777
+	        action :create
+	        recursive true
+	end
 end

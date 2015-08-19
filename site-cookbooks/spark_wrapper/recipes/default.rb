@@ -42,7 +42,7 @@ end
   directory dir do
     recursive true
     owner node[:spark][:user]
-    mode 750
+    mode 0770
   end
 end
 
