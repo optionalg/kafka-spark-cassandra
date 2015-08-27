@@ -22,7 +22,7 @@ Wrapper of the [zookeeper-cluster](https://supermarket.chef.io/cookbooks/zookeep
 ##[kafka](https://github.com/passworks/kafka-spark-cassandra/blob/master/site-cookbooks/kafka_wrapper)
 Simplified version of the [apache-kafka](https://supermarket.chef.io/cookbooks/apache_kafka) cookbook to install Kafka 0.8.2.1.
 
-##[spark](https://github.com/passworks/kafka-spark-cassandra/tree/master/site-cookbooks/spark_wrapper)
+##[spark](https://github.com/passworks/kafka-spark-cassandra/tree/master/site-cookbooks/spark)
 Cookbook to install Spark 1.4.1.
 
 ##[spark-jobserver](https://github.com/passworks/kafka-spark-cassandra/blob/master/site-cookbooks/spark_jobserver)
