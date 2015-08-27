@@ -10,7 +10,7 @@
   "chef_type": "role",
   "run_list": [
     "role[spark-cluster]",
-    "recipe[spark_wrapper::worker]"
+    "recipe[spark::worker]"
   ],
   "env_run_lists": {
 

@@ -29,7 +29,7 @@
 # - SPARK_LIBRARY_PATH, to add extra search paths for native libraries.
 
 
-SPARK_MASTER_IP=<%= @spark_master_ip %>
+SPARK_MASTER_IP=<%= @spark_master %>
 SPARK_PUBLIC_DNS=<%= @node["ipaddress"] %>
 SPARK_MASTER_WEBUI_PORT=8080
 <%- @others.each do |k, v| %>

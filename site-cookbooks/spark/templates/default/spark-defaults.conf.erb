@@ -1,0 +1,10 @@
+# Default system properties included when running spark-submit.
+# This is useful for setting default environmental settings.
+
+# Example:
+spark.master                       spark://<%= @spark_master %>:7077
+spark.cassandra.connection.host    <%= @cassandra_host %>
+
+<%- @others.each do |k, v| %>
+  <%= k %>=<%= v %>
+<%- end %>

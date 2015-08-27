@@ -14,7 +14,7 @@
   "run_list": [
     "role[basic-servers]",
     "recipe[scala_wrapper]",
-    "recipe[spark_wrapper]"
+    "recipe[spark]"
   ],
   "env_run_lists": {
 
