@@ -10,6 +10,6 @@
 bag = data_bag_item('config', node['zookeeper-cluster']['databag'])
 
 node.default['zookeeper-cluster']['config']['instance_name'] = node['ipaddress']
-node.default['zookeeper-cluster']['config']['ensemble'] = bag['ensemble']
+node.default['zookeeper-cluster']['config']['ensemble'] = bag['nodes']
 
 include_recipe 'zookeeper-cluster::default'

@@ -1,0 +1,1 @@
+default['zookeeper-cluster']['databag'] = "zookeeper.rb"

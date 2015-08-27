@@ -1,6 +1,6 @@
 {
   "id": "zookeeper",
-  "ensemble": [
+  "nodes": [
     "aaa.aaa.aaa.aaa",
     "bbb.bbb.bbb.bbb",
     "ccc.ccc.ccc.ccc"

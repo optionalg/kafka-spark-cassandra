@@ -5,3 +5,4 @@
 /data_bags/config/*.json
 /nodes/*.json
 *.lock
+*.DS_Store
