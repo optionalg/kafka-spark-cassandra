@@ -1,0 +1,1 @@
+See [apache_kafka](https://github.com/MathYourLife/apache_kafka) documentation, since this cookbook is based on it.
