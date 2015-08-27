@@ -88,7 +88,7 @@ Role for all the zookeeper nodes.
 ```
 {
   "id": "zookeeper",
-  "ensemble": [
+  "nodes": [
     "<server-ip>"
   ]
 }
