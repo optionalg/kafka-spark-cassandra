@@ -15,7 +15,6 @@ kill timeout 300
 
 limit nofile 32768 32768
 
-
 pre-start exec start-stop-daemon --start --chuid spark --name spark --exec <%= @jobserver_dir %>/server_start.sh
 
 post-stop exec start-stop-daemon --start --chuid spark --name spark --exec <%= @jobserver_dir %>/server_stop.sh

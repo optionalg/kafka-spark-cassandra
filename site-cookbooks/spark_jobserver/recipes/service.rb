@@ -7,9 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 
-jobserver_user = node["jobserver"]["user"]
+jobserver_user  = node["jobserver"]["user"]
 jobserver_group = node["jobserver"]["group"]
-jobserver_dir = node["jobserver"]["dir"]
+jobserver_dir   = node["jobserver"]["dir"]
 
 # init script for spark jobserver
 template "etc/init/jobserver.conf" do

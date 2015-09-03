@@ -9,11 +9,11 @@
 
 include_recipe "spark_jobserver::create-user"
 
-jobserver_user = node["jobserver"]["user"]
-jobserver_group = node["jobserver"]["group"]
-jobserver_download = node["jobserver"]["download"]
-jobserver_dir = node["jobserver"]["dir"]
-jobserver_log_dir = node["jobserver"]["log_dir"]
+jobserver_user      = node["jobserver"]["user"]
+jobserver_group     = node["jobserver"]["group"]
+jobserver_download  = node["jobserver"]["download"]
+jobserver_dir       = node["jobserver"]["dir"]
+jobserver_log_dir   = node["jobserver"]["log_dir"]
 
 # Create the jobserver dir
 directory jobserver_dir do
@@ -36,7 +36,7 @@ remote_file "#{jobserver_dir}/job-server-downloaded.tar.gz" do
 end
 
 execute "unzip jobserver source" do
-	command "tar -xvf #{jobserver_dir}/job-server-downloaded.tar.gz -C #{jobserver_dir}"
+	command "tar -xvf #{jobserver_dir}/job-server-downloaded.tar.gz -C #{jobserver_dir}/.."
 	not_if { Dir["#{jobserver_dir}/*"].count > 1 }
 end
 

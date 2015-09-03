@@ -23,18 +23,30 @@ spark {
   }
 
   # predefined Spark contexts
-  # contexts {
-  #   my-low-latency-context {
-  #     num-cpu-cores = 1           # Number of cores to allocate.  Required.
-  #     memory-per-node = 512m         # Executor memory per node, -Xmx style eg 512m, 1G, etc.
-  #   }
-  #   # define additional contexts here
-  # }
+  contexts {
+    <%- @contexts.each do |name, props| %>
+      <%= name %> {
+        <%- props.each do |key, val| %>
+          spark.cassandra.connection.host = <%= @cassandra_host %>
+          <%- if key != "passthrough" %>
+            <%= key + " = " + val %>
+          <%- else %>
+            passthrough {
+              <%- val.each do |passthrough_key, passthrough_val| %>
+                <%= passthrough_key + " = " + passthrough_val %>
+              <%- end %>
+            }
+          <%- end %>
+        <%- end %>
+      }
+    <%- end %>
+  }
+  
 
   # universal context configuration.  These settings can be overridden, see README.md
   context-settings {
-    # num-cpu-cores = 2           # Number of cores to allocate.  Required.
-    # memory-per-node = 512m         # Executor memory per node, -Xmx style eg 512m, #1G, etc.
+    num-cpu-cores = 2           # Number of cores to allocate.  Required.
+    memory-per-node = 1G        # Executor memory per node, -Xmx style eg 512m, #1G, etc.
 
     # in case spark distribution should be accessed from HDFS (as opposed to being installed on every mesos slave)
     # spark.executor.uri = "hdfs://namenode:8020/apps/spark/spark.tgz"
@@ -55,4 +67,16 @@ spark {
 
 # Note that you can use this file to define settings not only for job server,
 # but for your Spark jobs as well.  Spark job configuration merges with this configuration file as defaults.
+
+spray.can.server {
+  # uncomment the next line for making this an HTTPS example
+  # ssl-encryption = on
+  idle-timeout = 60 s
+  request-timeout = 40 s
+  pipelining-limit = 2 # for maximum performance (prevents StopReading / ResumeReading messages to the IOBridge)
+  # Needed for HTTP/1.0 requests with missing Host headers
+  default-host-header = "spray.io:8765"
+  # Increase this in order to upload bigger job jars
+  parsing.max-content-length = 100m
+}
 

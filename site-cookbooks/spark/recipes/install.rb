@@ -40,12 +40,22 @@ end
 # Give permissions to the user inside the jobserver_dir
 ruby_block 'give some permissions' do
   block do
-    Dir["#{spark_dir}/**/*"].each do |path|
-      f = Chef::Resource::File.new(path, run_context)
-      f.owner spark_user
-      f.group spark_group
-      f.mode 0770
-      f.run_action :create
+    Dir["#{spark_dir}/**/**/*"].each do |path|
+      if File.directory? path
+        # It's a directory
+        d = Chef::Resource::Directory.new(path, run_context)
+        d.owner spark_user
+        d.group spark_group
+        d.mode 0770
+        d.run_action :create
+      else
+        # It's a file
+        f = Chef::Resource::File.new(path, run_context)
+        f.owner spark_user
+        f.group spark_group
+        f.mode 0770
+        f.run_action :create
+      end
     end
   end
 end

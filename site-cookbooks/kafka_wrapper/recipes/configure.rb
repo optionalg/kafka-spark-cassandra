@@ -33,7 +33,7 @@ template ::File.join(config_dir,
   variables(
     :broker_id => broker_id,
     :port => node["kafka_wrapper"]["port"],
-    :zookeeper_connect => bag['ensemble'].map { |m| "#{m}:2181"}.join(','),
+    :zookeeper_connect => bag['nodes'].map { |m| "#{m}:2181"}.join(','),
     :advertised_host_name => node["ipaddress"],
     :entries => node["kafka_wrapper"]["conf"]["server"]["entries"]
   )

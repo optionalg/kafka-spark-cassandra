@@ -7,12 +7,13 @@
 # All rights reserved - Do Not Redistribute
 #
 
-jobserver_user = node["jobserver"]["user"]
+jobserver_user  = node["jobserver"]["user"]
 jobserver_group = node["jobserver"]["group"]
-jobserver_dir = node["jobserver"]["dir"]
+jobserver_dir   = node["jobserver"]["dir"]
 
 # We load the spark-cluster databag in order to get the spark master
 bag = data_bag_item('config', node["jobserver"]["databag"])
+cassandra_bag = data_bag_item('config', node["jobserver"]["cassandra"])
 
 # jobserver.conf to setup some configurations
 template "#{jobserver_dir}/jobserver.conf" do
@@ -21,7 +22,9 @@ template "#{jobserver_dir}/jobserver.conf" do
 	group jobserver_group
 	mode 770
 	variables(
-		:master => "spark://#{bag["master"]}:7077"
+		:master => "spark://#{bag["master"]}:7077",
+		:cassandra_host => cassandra_bag["seeds"].sample,
+		:contexts => bag["contexts"]
 	)
 	notifies :restart, "service[jobserver]", :delayed
 end

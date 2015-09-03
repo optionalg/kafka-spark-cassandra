@@ -10,7 +10,7 @@
 spark_user = node[:spark][:user]
 spark_group = node[:spark][:group]
 
-user jobserver_user do
+user spark_user do
 	comment "Spark system user"
 	system true
 	action :create

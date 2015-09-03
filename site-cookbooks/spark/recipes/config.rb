@@ -24,7 +24,7 @@ template  "#{spark_dir}/conf/spark-env.sh" do
     :others       => node["spark"]["env"]["others"]
   )
 
-  notifies :restart, "service[spark_master]", :Delayed
+  notifies :restart, "service[spark_master]", :delayed
   notifies :restart, "service[spark_worker]", :delayed
 end
 
@@ -39,7 +39,7 @@ template "#{spark_dir}/conf/spark-defaults.conf" do
     :others       => node[:spark][:defaults][:others]
   )
 
-  notifies :restart, "service[spark_master]", :Delayed
+  notifies :restart, "service[spark_master]", :delayed
   notifies :restart, "service[spark_worker]", :delayed
 end
 
@@ -69,7 +69,7 @@ template "/etc/init/spark_master.conf" do
     :spark_dir => spark_dir,
     :spark_master => bag["master"]
   )
-  notifies :restart, "service[spark_master]", :Delayed
+  notifies :restart, "service[spark_master]", :delayed
 end
 
 # Script to start and stop spark workers
