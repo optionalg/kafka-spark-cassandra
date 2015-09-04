@@ -12,6 +12,7 @@ spark_group = node[:spark][:group]
 spark_dir   = "#{node[:spark][:install_dir]}/spark-#{node[:spark][:version]}"
 
 bag = data_bag_item('config', node["spark-cluster"]["databag"])
+bag_cassandra = data_bag_item('config', node["cassandra-cluster"]["databag"])
 
 # File to setup spark environment
 template  "#{spark_dir}/conf/spark-env.sh" do
@@ -36,6 +37,7 @@ template "#{spark_dir}/conf/spark-defaults.conf" do
   mode 0770
   variables(
     :spark_master => bag["master"],
+    :cassandra_host => bag_cassandra["seeds"].sample,
     :others       => node[:spark][:defaults][:others]
   )
 

@@ -18,3 +18,6 @@ default[:spark][:env][:others] = {
 default[:spark][:defaults][:others] = {
 
 }
+
+default["cassandra-cluster"]["databag"] = "cassandra"
+default[":spark-cluster"]["databag"] = "spark"
