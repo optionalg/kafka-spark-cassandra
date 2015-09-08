@@ -1,7 +1,5 @@
 include_recipe "apt"
 include_recipe "lighthouse::create_user"
-include_recipe "postgresql::server"
-
 
 apt_repository "nginx" do
     uri "http://nginx.org/packages/ubuntu/"
@@ -17,8 +15,13 @@ package "nginx" do
 end
 
 apt_repository 'redis' do
-  uri          'ppa:rwky/redis'
+  action :add
+  uri "http://ppa.launchpad.net/rwky/redis/ubuntu"
   distribution 'trusty'
+  components ["main"]
+  keyserver "keyserver.ubuntu.com"
+  key "5862E31D"
+  notifies :run, "execute[apt-get update]", :immediately
 end
 
 package 'redis-server' do
