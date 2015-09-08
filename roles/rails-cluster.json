@@ -1,0 +1,17 @@
+{
+  "name": "rails-cluster",
+  "description": "Role for all rails servers.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[rvm_wrapper]"
+  ],
+  "env_run_lists": {
+
+  }
+}
