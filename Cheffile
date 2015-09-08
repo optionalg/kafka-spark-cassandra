@@ -5,10 +5,12 @@ cookbook 'scala_wrapper',     :path => 'site-cookbooks/scala_wrapper'
 cookbook 'monit_wrapper' ,    :git => 'https://github.com/clearstorydata-cookbooks/monit_wrapper.git'
 cookbook 'zookeeper_wrapper', :path => 'site-cookbooks/zookeeper_wrapper'
 cookbook 'kafka_wrapper',     :path => 'site-cookbooks/kafka_wrapper'
-cookbook 'spark', 	      :path => 'site-cookbooks/spark'
+cookbook 'spark', 	      	  :path => 'site-cookbooks/spark'
 cookbook 'spark_jobserver',   :path => 'site-cookbooks/spark_jobserver'
 cookbook 'cassandra',         :path => 'site-cookbooks/cassandra'
 
-cookbook 'postgresql', 		  :git => 'https://github.com/phlipper/chef-postgresql.git',   :ref => "v0.16.1"
+cookbook 'postgresql',        :git => 'https://github.com/phlipper/chef-postgresql.git',   :ref => "v0.16.1"
 cookbook 'postgresql_wrapper',:path => 'site-cookbooks/postgresql_wrapper'
+cookbook 'rvm', 	      	  :git => 'git://github.com/fnichol/chef-rvm.git', :ref => 'v0.9.4'
 cookbook 'lighthouse',        :path => 'site-cookbooks/lighthouse'
+cookbook 'rvm_wrapper',       :git => 'https://github.com/martinisoft/chef-rvm.git'
