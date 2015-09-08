@@ -1,0 +1,19 @@
+description "Spark Master"
+
+# This file is managed by Chef
+# Changes will be overwritten
+
+start on runlevel [2345]
+stop on starting rc RUNLEVEL=[016]
+
+respawn
+respawn limit 2 5
+
+umask 007
+
+kill timeout 300
+
+limit nofile 32768 32768
+
+pre-start exec start-stop-daemon --start --chuid <%= @cassandra_user %> --name CassandraDaemon --exec /usr/sbin/cassandra
+post-stop exec pkill -f CassandraDaemon
