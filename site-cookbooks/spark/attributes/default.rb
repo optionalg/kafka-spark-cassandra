@@ -19,5 +19,7 @@ default[:spark][:defaults][:others] = {
 
 }
 
-default["cassandra-cluster"]["databag"] = "cassandra"
-default[":spark-cluster"]["databag"] = "spark"
+# databags that will be used
+default[:spark][:databag] 		= "spark"
+default[:cassandra][:databag] 	= "cassandra"
+default[:kafka][:databag] 		= "zookeeper"

@@ -17,7 +17,9 @@
 * `default[:spark][:env][:others]` - Hash with some aditional options for spark-env.sh
 * `default[:spark][:defaults][:others]` - Hash with some aditional options fo spark-defaults.conf
 * `default[:cassandra-cluster][:databag]` - The name of the databag with all cassandra seed servers (defaults to cassandra)
-* `default[:spark-cluster][:databag]` - The name of the databag with the spark master hostname.
+* `default[:spark][:databag]` - The name of the databag with the spark master hostname (defaults to spark).
+* `default[:cassandra][:databag]` - The name of the databag with the cassandra seeds hostname (defaults to cassandra).
+* `default[:kafka][:databag]` - The name of the databag with the kafka brockers hostname (defaults to zookeeper).
 
 ## Required Databags
 ## cassandra
@@ -46,6 +48,16 @@ Here's a sample of this databag:
 ```
 
 **master -** The hostname of the spark master.
+
+## kafka
+
+Here's a sample of this databag:
+
+```
+{
+  "id": "kafka",
+  "nodes": ["bbb.bbb.bbb.bbb"]
+}
 
 ## TODO
 * Talk about the template files, the properties and how the server will be configured.

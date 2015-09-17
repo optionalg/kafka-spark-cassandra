@@ -29,3 +29,4 @@ default["jobserver"]["scala_version"] = "2.11.7"
 # Databag with the spark master hostname
 default["jobserver"]["databag"] = "spark"
 default["jobserver"]["cassandra"] = "cassandra"
+default["jobserver"]["kafka"] = "zookeeper"

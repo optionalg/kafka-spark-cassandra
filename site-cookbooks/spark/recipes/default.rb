@@ -7,5 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
+# install and configure spark
 include_recipe "spark::install"
 include_recipe "spark::config"

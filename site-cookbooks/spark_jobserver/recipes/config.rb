@@ -14,6 +14,7 @@ jobserver_dir   = node["jobserver"]["dir"]
 # We load the spark-cluster databag in order to get the spark master
 bag = data_bag_item('config', node["jobserver"]["databag"])
 cassandra_bag = data_bag_item('config', node["jobserver"]["cassandra"])
+kafka_bag = data_bag_item('config', node["jobserver"]["kafka"])
 
 # jobserver.conf to setup some configurations
 template "#{jobserver_dir}/jobserver.conf" do
@@ -24,6 +25,7 @@ template "#{jobserver_dir}/jobserver.conf" do
 	variables(
 		:master => "spark://#{bag["master"]}:7077",
 		:cassandra_host => cassandra_bag["seeds"].sample,
+	    :kafka_brokers => kafka_bag["nodes"].join(":9092, ") + ":9092",
 		:contexts => bag["contexts"]
 	)
 	notifies :restart, "service[jobserver]", :delayed

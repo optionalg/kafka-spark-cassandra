@@ -32,6 +32,11 @@
 SPARK_MASTER_IP=<%= @spark_master %>
 SPARK_PUBLIC_DNS=<%= @node["ipaddress"] %>
 SPARK_MASTER_WEBUI_PORT=8080
+
 <%- @others.each do |k, v| %>
   <%= k %>=<%= v %>
 <%- end %>
+
+# Side notes:
+# - Spark will use all the available cores
+# - Spark will use all the available memory - 1G (for the operative system)

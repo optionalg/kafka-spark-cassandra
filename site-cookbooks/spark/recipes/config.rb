@@ -11,13 +11,12 @@ spark_user  = node[:spark][:user]
 spark_group = node[:spark][:group]
 spark_dir   = "#{node[:spark][:install_dir]}/spark-#{node[:spark][:version]}"
 
-spark_cluster_databag = 
+spark_cluster_databag     = data_bag_item("config", node["spark"]["databag"])
+cassandra_cluster_databag = data_bag_item("config", node["cassandra"]["databag"])
+kafka_cluster_databag     = data_bag_item("config", node["kafka"]["databag"])
 
-
-
-bag = data_bag_item('config', node["spark-cluster"]["databag"])
-bag_cassandra = data_bag_item('config', node["cassandra-cluster"]["databag"])
-
+# Will use this file to setup some environment variables that will be used
+# by spark jobs.
 # File to setup spark environment
 template  "#{spark_dir}/conf/spark-env.sh" do
   source  "spark-env.sh.erb"
@@ -25,12 +24,14 @@ template  "#{spark_dir}/conf/spark-env.sh" do
   group   spark_group
   mode    0770
   variables(
-    :spark_master => bag["master"],
-    :others       => node["spark"]["env"]["others"]
+    :spark_master   => spark_cluster_databag["master"],
+    :kafka_brokers  => kafka_cluster_databag["nodes"].join(":9092, ") + ":9092",
+    :cassandra_host => cassandra_cluster_databag["seeds"].join(", "),
+    :others         => node["spark"]["env"]["others"]
   )
 
-  notifies :restart, "service[spark_master]", :delayed
-  notifies :restart, "service[spark_worker]", :delayed
+  #notifies :restart, "service[spark_master]", :delayed
+  #notifies :restart, "service[spark_worker]", :delayed
 end
 
 # File to setup spark defaults
@@ -40,13 +41,13 @@ template "#{spark_dir}/conf/spark-defaults.conf" do
   group spark_group
   mode 0770
   variables(
-    :spark_master => bag["master"],
-    :cassandra_host => bag_cassandra["seeds"].sample,
-    :others       => node[:spark][:defaults][:others]
+    :spark_master   => spark_cluster_databag["master"],
+    :cassandra_host => cassandra_cluster_databag["seeds"].sample,
+    :others         => node[:spark][:defaults][:others]
   )
 
-  notifies :restart, "service[spark_master]", :delayed
-  notifies :restart, "service[spark_worker]", :delayed
+  #notifies :restart, "service[spark_master]", :delayed
+  #notifies :restart, "service[spark_worker]", :delayed
 end
 
 # Script to start and stop spark master
@@ -56,12 +57,12 @@ template "/etc/init/spark_master.conf" do
   group  spark_group
   action :create
   mode   0770
-  notifies :restart, "service[spark_master]", :delayed
   variables(
-    :spark_dir => spark_dir,
-    :spark_master => bag["master"]
+    :spark_dir    => spark_dir,
+    :spark_master => spark_cluster_databag["master"]
   )
-  notifies :restart, "service[spark_master]", :delayed
+  #notifies :restart, "service[spark_master]", :delayed
+  #notifies :restart, "service[spark_master]", :delayed
 end
 
 # Script to start and stop spark workers
@@ -71,22 +72,10 @@ template "/etc/init/spark_worker.conf" do
   group  spark_group
   action :create
   mode   0770
-  notifies :restart, "service[spark_worker]", :delayed
   variables(
-    :spark_dir => spark_dir,
-    :spark_master => bag["master"]
+    :spark_dir    => spark_dir,
+    :spark_master => spark_cluster_databag["master"]
   )
-  notifies :restart, "service[spark_worker]", :delayed
-end
-
-service "spark_master" do
-  provider Chef::Provider::Service::Upstart
-  supports :status => true, :restart => true, :stop => true
-  action :enable
-end
-
-service "spark_worker" do
-  provider Chef::Provider::Service::Upstart
-  supports :status => true, :restart => true, :stop => true
-  action :enable
+  #notifies :restart, "service[spark_worker]", :delayed
+  #notifies :restart, "service[spark_worker]", :delayed
 end

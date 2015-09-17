@@ -27,12 +27,13 @@ spark {
     <%- @contexts.each do |name, props| %>
       <%= name %> {
         <%- props.each do |key, val| %>
-          spark.cassandra.connection.host = <%= @cassandra_host %>
+   	  spark.cassandra.connection.host = <%= @cassandra_host %>
           <%- if key != "passthrough" %>
             <%= key + " = " + val %>
           <%- else %>
             passthrough {
-              <%- val.each do |passthrough_key, passthrough_val| %>
+	      passworks.kafka.metadata.borker.list = "<%= @kafka_brokers %>"
+	      <%- val.each do |passthrough_key, passthrough_val| %>
                 <%= passthrough_key + " = " + passthrough_val %>
               <%- end %>
             }
@@ -45,8 +46,9 @@ spark {
 
   # universal context configuration.  These settings can be overridden, see README.md
   context-settings {
-    num-cpu-cores = 2           # Number of cores to allocate.  Required.
-    memory-per-node = 1G        # Executor memory per node, -Xmx style eg 512m, #1G, etc.
+    # use all the available resources
+    #num-cpu-cores = 2           # Number of cores to allocate.  Required.
+    #memory-per-node = 1G        # Executor memory per node, -Xmx style eg 512m, #1G, etc.
 
     # in case spark distribution should be accessed from HDFS (as opposed to being installed on every mesos slave)
     # spark.executor.uri = "hdfs://namenode:8020/apps/spark/spark.tgz"

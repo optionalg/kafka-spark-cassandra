@@ -1,0 +1,29 @@
+{
+  "name": "spark-streaming-master",
+  "description": "Role for the master of the spark streaming master.",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+    "spark": {
+      "databag": "spark-streaming",
+      "env": {
+        "others": {
+          "SPARK_BATCH_DURATION": "1",
+          "SPARK_KAFKA_TOPIC": "Lighthouse",
+          "SPARK_CASSANDRA_KEYSPACE": "Lighthouse",
+          "SPARK_CASSANDRA_TABLE_SESSIONS": "sessions",
+          "SPARK_CASSANDRA_TABLE_USERS": "users",
+          "SPARK_CASSANDRA_TABLE_EVENTS": "events"
+        }
+      }
+    }
+  },
+  "chef_type": "role",
+  "run_list": [
+    "role[spark-master]"
+  ],
+  "env_run_lists": {
+
+  }
+}
