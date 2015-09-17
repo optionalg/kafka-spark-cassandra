@@ -11,6 +11,10 @@ spark_user  = node[:spark][:user]
 spark_group = node[:spark][:group]
 spark_dir   = "#{node[:spark][:install_dir]}/spark-#{node[:spark][:version]}"
 
+spark_cluster_databag = 
+
+
+
 bag = data_bag_item('config', node["spark-cluster"]["databag"])
 bag_cassandra = data_bag_item('config', node["cassandra-cluster"]["databag"])
 
@@ -41,20 +45,6 @@ template "#{spark_dir}/conf/spark-defaults.conf" do
     :others       => node[:spark][:defaults][:others]
   )
 
-  notifies :restart, "service[spark_master]", :delayed
-  notifies :restart, "service[spark_worker]", :delayed
-end
-
-# File with all the slaves
-template "#{spark_dir}/conf/slaves" do
-  source  "slaves.erb"
-  owner   spark_user
-  group   spark_group
-  mode    0770
-  variables(
-    :slaves => bag["slaves"]
-  )
- 
   notifies :restart, "service[spark_master]", :delayed
   notifies :restart, "service[spark_worker]", :delayed
 end
