@@ -3,12 +3,21 @@
   "description": "Role for all spark nodes.",
   "json_class": "Chef::Role",
   "default_attributes": {
-     "spark-cluster": {
-        "databag": "spark"
-     }
   },
   "override_attributes": {
-
+    "spark": {
+      "defaults": {
+          "others": {
+            "spark.passworks.streaming.batch.duration": "1",
+            "spark.passworks.kafka.topic": "Lighthouse",
+            "spark.passworks.cassandra.keyspace": "Lighthouse",
+            "spark.passworks.cassandra.table.sessions": "sessions",
+            "spark.passworks.cassandra.table.users": "users",
+            "spark.passworks.cassandra.table.events": "events",
+            "spark.passworks.cassandra.table.kafka_offsets": "kafka_offsets"
+          }
+      }
+    }
   },
   "chef_type": "role",
   "run_list": [

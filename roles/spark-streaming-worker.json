@@ -6,17 +6,7 @@
   },
   "override_attributes": {
     "spark": {
-      "databag": "spark-streaming",
-      "env": {
-        "others": {
-          "SPARK_BATCH_DURATION": "1",
-          "SPARK_KAFKA_TOPIC": "Lighthouse",
-          "SPARK_CASSANDRA_KEYSPACE": "Lighthouse",
-          "SPARK_CASSANDRA_TABLE_SESSIONS": "sessions",
-          "SPARK_CASSANDRA_TABLE_USERS": "users",
-          "SPARK_CASSANDRA_TABLE_EVENTS": "events"
-        }
-      }
+      "databag": "spark-streaming"
     }
   },
   "chef_type": "role",

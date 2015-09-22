@@ -25,8 +25,6 @@ template  "#{spark_dir}/conf/spark-env.sh" do
   mode    0770
   variables(
     :spark_master   => spark_cluster_databag["master"],
-    :kafka_brokers  => kafka_cluster_databag["nodes"].join(":9092, ") + ":9092",
-    :cassandra_host => cassandra_cluster_databag["seeds"].join(", "),
     :others         => node["spark"]["env"]["others"]
   )
 
@@ -42,6 +40,7 @@ template "#{spark_dir}/conf/spark-defaults.conf" do
   mode 0770
   variables(
     :spark_master   => spark_cluster_databag["master"],
+    :kafka_hosts    => kafka_cluster_databag["nodes"].join(":9092, ") + ":9092",
     :cassandra_host => cassandra_cluster_databag["seeds"].sample,
     :others         => node[:spark][:defaults][:others]
   )

@@ -1,10 +1,14 @@
 # Default system properties included when running spark-submit.
 # This is useful for setting default environmental settings.
 
-# Example:
 spark.master                       spark://<%= @spark_master %>:7077
-spark.cassandra.connection.host    <%= @cassandra_host %>
+spark.eventLog.enabled  true
+spark.serializer org.apache.spark.serializer.KryoSerializer
+spark.streaming.stopGracefullyOnShutdown true
+
+spark.cassandra.connection.host <%= @cassandra_host %>
+spark.kafka.connection.hosts <%= @kafka_hosts %>
 
 <%- @others.each do |k, v| %>
-  <%= k %>=<%= v %>
+<%= k %>=<%= v %>
 <%- end %>
